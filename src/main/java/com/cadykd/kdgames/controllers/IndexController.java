@@ -1,4 +1,4 @@
-package com.CadyKD.KDGames.controllers;
+package com.cadykd.kdgames.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

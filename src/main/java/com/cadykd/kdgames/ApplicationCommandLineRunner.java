@@ -1,4 +1,4 @@
-package com.CadyKD.KDGames;
+package com.cadykd.kdgames;
 
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
@@ -15,7 +15,7 @@ public class ApplicationCommandLineRunner implements CommandLineRunner {
 	
 	@Autowired
 	public ApplicationCommandLineRunner() {
-	
+		// TODO: complete method
 	}
 	
 	@PostConstruct
@@ -23,6 +23,6 @@ public class ApplicationCommandLineRunner implements CommandLineRunner {
 	
 	@Override
 	public void run(String... args) throws Exception {
-	
+		// TODO: complete method
 	}
 }
