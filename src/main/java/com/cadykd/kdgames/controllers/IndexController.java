@@ -9,4 +9,19 @@ public class IndexController {
 	public String homePage() {
 		return "index";
 	}
+	
+	@GetMapping("/user")
+	public String userPage() {
+		return "index";
+	}
+	
+	@GetMapping("/admin")
+	public String adminPage() {
+		return "index";
+	}
+	
+	@GetMapping("/login")
+	public String login() {
+		return "login";
+	}
 }

@@ -29,6 +29,7 @@ public class SkillTreeNode {
 	List<SkillTreeNode> childSkills = null;
 	int minLevel;
 	int maxLevel;
+	int currentLevel;
 	int sortOrder;
 	
 	// Check if the current node is a root skill or child skill
@@ -46,11 +47,11 @@ public class SkillTreeNode {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 		SkillTreeNode that = (SkillTreeNode) o;
-		return minLevel == that.minLevel && maxLevel == that.maxLevel && sortOrder == that.sortOrder && skillName.equals(that.skillName) && title.equals(that.title) && Objects.equals(parentSkill, that.parentSkill) && Objects.equals(childSkills, that.childSkills);
+		return minLevel == that.minLevel && maxLevel == that.maxLevel && currentLevel == that.currentLevel && sortOrder == that.sortOrder && skillName.equals(that.skillName) && title.equals(that.title) && Objects.equals(parentSkill, that.parentSkill) && Objects.equals(childSkills, that.childSkills);
 	}
 	
 	@Override
 	public int hashCode() {
-		return Objects.hash(skillName, title, parentSkill, childSkills, minLevel, maxLevel, sortOrder);
+		return Objects.hash(skillName, title, parentSkill, childSkills, minLevel, maxLevel, currentLevel, sortOrder);
 	}
 }
