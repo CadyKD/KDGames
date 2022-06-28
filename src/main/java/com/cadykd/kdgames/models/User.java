@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import javax.persistence.*;
 import java.util.LinkedHashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @AllArgsConstructor
@@ -43,4 +44,28 @@ public class User {
 			joinColumns = @JoinColumn(name = "user_name"),
 			inverseJoinColumns = @JoinColumn(name = "character_name"))
 	Set<Character> characters = new LinkedHashSet<>();
+	
+	public void setPassword(String password) {
+		// Delete first line under this and uncomment second line when security is added
+		this.password = password;
+		//this.password = new BCryptPasswordEncoder(4).encode(password);
+	}
+	
+	public void addCharacter(Character character) {
+		characters.add(character);
+		character.addUser(this);
+	}
+	
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		User user = (User) o;
+		return userName.equals(user.userName) && email.equals(user.email) && password.equals(user.password) && Objects.equals(characters, user.characters);
+	}
+	
+	@Override
+	public int hashCode() {
+		return Objects.hash(userName, email, password, characters);
+	}
 }
