@@ -50,4 +50,8 @@ public class Character {
 			joinColumns = @JoinColumn(name = "character_name"),
 			inverseJoinColumns = @JoinColumn(name = "tree_id"))
 	SkillTree skillTree;
+	
+	public void addUser(User user){
+		this.user = user;
+	}
 }
