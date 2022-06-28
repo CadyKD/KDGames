@@ -14,13 +14,12 @@ import javax.validation.constraints.NotNull;
 @Slf4j
 @ToString
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Table(name = "Character")
+@Table(name = "character")
 @Entity
 // This class is to hold character data for RyzomTools
 public class Character {
 	// Table Fields
 	@Id
-	@Column(name = "Name")
 	String characterName;
 	
 	@NotNull
@@ -43,9 +42,12 @@ public class Character {
 		FEMALE
 	}
 	
-	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-	@JoinTable(name = "CharacterSkillTree",
-			joinColumns = @JoinColumn(name = "Name", referencedColumnName = "Name"),
-			inverseJoinColumns = @JoinColumn(name = "id", referencedColumnName = "id"))
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	User user;
+	
+	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+	@JoinTable(name = "character_skill_tree",
+			joinColumns = @JoinColumn(name = "character_name"),
+			inverseJoinColumns = @JoinColumn(name = "tree_id"))
 	SkillTree skillTree;
 }

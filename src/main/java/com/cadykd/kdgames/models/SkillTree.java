@@ -15,10 +15,11 @@ import java.util.List;
 @Slf4j
 @ToString
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Table(name = "SkillTrees")
+@Table(name = "skill_tree")
 @Entity
 // This class is to hold skillTree data for RyzomTools
 public class SkillTree {
+	// Table Fields
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
@@ -26,6 +27,6 @@ public class SkillTree {
 	
 	List<SkillTreeNode> skillList = new ArrayList<>();
 	
-	@OneToOne(mappedBy = "SkillTree", cascade = CascadeType.ALL, optional = false, orphanRemoval = true)
+	@OneToOne(mappedBy = "skillTree", cascade = CascadeType.ALL, optional = false, orphanRemoval = true)
 	Character character;
 }
