@@ -17,7 +17,7 @@ import javax.validation.constraints.NotNull;
 @Table(name = "character")
 @Entity
 // This class is to hold character data for RyzomTools
-public class Character {
+public class RyzomCharacter {
 	// Table Fields
 	@Id
 	String characterName;

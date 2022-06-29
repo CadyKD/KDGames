@@ -31,6 +31,7 @@ public class User {
 	@NonNull
 	String password;
 	
+	// Constructor
 	public User(String userName, String email, String password) {
 		this.userName = userName;
 		this.email = email;
@@ -39,21 +40,24 @@ public class User {
 		//this.password = new BCryptPasswordEncoder(4).encode(password);
 	}
 	
+	// One user may have many characters
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinTable(name = "user_characters",
 			joinColumns = @JoinColumn(name = "user_name"),
 			inverseJoinColumns = @JoinColumn(name = "character_name"))
-	Set<Character> characters = new LinkedHashSet<>();
+	Set<RyzomCharacter> ryzomCharacters = new LinkedHashSet<>();
 	
+	// Encryption for user passwords
 	public void setPassword(String password) {
 		// Delete first line under this and uncomment second line when security is added
 		this.password = password;
 		//this.password = new BCryptPasswordEncoder(4).encode(password);
 	}
 	
-	public void addCharacter(Character character) {
-		characters.add(character);
-		character.addUser(this);
+	// Add a character to the set of characters a user has
+	public void addCharacter(RyzomCharacter ryzomCharacter) {
+		ryzomCharacters.add(ryzomCharacter);
+		ryzomCharacter.addUser(this);
 	}
 	
 	@Override
@@ -61,11 +65,11 @@ public class User {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 		User user = (User) o;
-		return userName.equals(user.userName) && email.equals(user.email) && password.equals(user.password) && Objects.equals(characters, user.characters);
+		return userName.equals(user.userName) && email.equals(user.email) && password.equals(user.password) && Objects.equals(ryzomCharacters, user.ryzomCharacters);
 	}
 	
 	@Override
 	public int hashCode() {
-		return Objects.hash(userName, email, password, characters);
+		return Objects.hash(userName, email, password, ryzomCharacters);
 	}
 }

@@ -28,5 +28,5 @@ public class SkillTree {
 	List<SkillTreeNode> skillList = new ArrayList<>();
 	
 	@OneToOne(mappedBy = "skillTree", cascade = CascadeType.ALL, optional = false, orphanRemoval = true)
-	Character character;
+	RyzomCharacter ryzomCharacter;
 }
