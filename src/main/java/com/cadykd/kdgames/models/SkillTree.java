@@ -5,9 +5,7 @@ import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -30,6 +28,10 @@ public class SkillTree {
 	
 	@OneToOne(mappedBy = "skillTree", cascade = CascadeType.ALL, optional = false, orphanRemoval = true)
 	RyzomCharacter ryzomCharacter;
+	
+	public void addSkillNode(SkillTreeNode skillNode) {
+		this.skillList.add(skillNode);
+	}
 	
 	@Override
 	public boolean equals(Object o) {

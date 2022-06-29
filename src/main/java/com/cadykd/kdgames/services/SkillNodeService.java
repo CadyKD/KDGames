@@ -2,6 +2,7 @@ package com.cadykd.kdgames.services;
 
 import com.cadykd.kdgames.data.SkillNodeRepository;
 import com.cadykd.kdgames.data.SkillTreeRepository;
+import com.cadykd.kdgames.models.SkillTree;
 import com.cadykd.kdgames.models.SkillTreeNode;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
@@ -34,4 +35,17 @@ public class SkillNodeService {
 	public SkillTreeNode findBySkillName(String skillName) throws NoSuchElementException {
 		return skillNodeRepository.findById(skillName).orElseThrow();
 	}
+	
+	// Save new or make changes to a skill node
+	public void saveOrUpdate(SkillTreeNode skillNode){
+		skillNodeRepository.save(skillNode);
+		log.info(String.format("Ryzom Skill Node Generated: %s", skillNode.getSkillName()));
+	}
+	
+	// delete a skill node
+	public void delete(SkillTreeNode skillNode) {
+		skillNodeRepository.delete(skillNode);
+	}
+	
+	
 }
