@@ -1,5 +1,6 @@
 package com.cadykd.kdgames.models;
 
+import com.cadykd.kdgames.services.UserService;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
@@ -26,7 +27,7 @@ public class RyzomCharacter {
 	@Enumerated
 	@Column(nullable = false)
 	CharacterRace race;
-	enum CharacterRace {
+	public enum CharacterRace {
 		MATIS,
 		TRYKER,
 		FYROS,
@@ -37,7 +38,7 @@ public class RyzomCharacter {
 	@Enumerated
 	@Column(nullable = false)
 	CharacterGender gender;
-	enum CharacterGender {
+	public enum CharacterGender {
 		MALE,
 		FEMALE
 	}
@@ -51,7 +52,17 @@ public class RyzomCharacter {
 			inverseJoinColumns = @JoinColumn(name = "tree_id"))
 	SkillTree skillTree;
 	
+	public RyzomCharacter(String characterName, CharacterRace race, CharacterGender gender) {
+		this.characterName = characterName;
+		this.race = race;
+		this.gender = gender;
+	}
+	
 	public void addUser(User user){
 		this.user = user;
+	}
+	
+	public void addSkillTree(SkillTree skillTree) {
+		this.skillTree = skillTree;
 	}
 }

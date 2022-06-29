@@ -41,7 +41,7 @@ public class User {
 	}
 	
 	// One user may have many characters
-	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinTable(name = "user_characters",
 			joinColumns = @JoinColumn(name = "user_name"),
 			inverseJoinColumns = @JoinColumn(name = "character_name"))
