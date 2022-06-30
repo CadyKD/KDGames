@@ -64,9 +64,9 @@ public class ApplicationCommandLineRunner implements CommandLineRunner {
 		
 		try {
 			userService.addCharacter(BAYTHAN, ryzomCharacterService.findByCharacterName(WHYSPER));
-			ryzomCharacterService.findByCharacterName(WHYSPER).addUser(userService.findByUserName(BAYTHAN));
+//			ryzomCharacterService.findByCharacterName(WHYSPER).addUser(userService.findByUserName(BAYTHAN));
 			userService.addCharacter("CadyKD", ryzomCharacterService.findByCharacterName(BAYTHAN));
-			ryzomCharacterService.findByCharacterName(BAYTHAN).addUser(userService.findByUserName("CadyKD"));
+//			ryzomCharacterService.findByCharacterName(BAYTHAN).addUser(userService.findByUserName("CadyKD"));
 			
 			ryzomCharacterService.addSkillTreeToCharacter(BAYTHAN, new SkillTree());
 			ryzomCharacterService.addSkillTreeToCharacter(WHYSPER, new SkillTree());
@@ -80,11 +80,10 @@ public class ApplicationCommandLineRunner implements CommandLineRunner {
 		log.info("Find All Users Sorted By Name Desc");
 		log.warn(userService.findAllSortedBy(Sort.by(Sort.Direction.DESC, "userName")).toString());
 		
-//		log.info("Find All Characters For Baythan");
-//		log.warn(ryzomCharacterService.getUserCharacters(BAYTHAN).toString());
+		log.warn("Find All Characters For Baythan: "+ ryzomCharacterRepository.findUserCharacters(BAYTHAN).toString());
 		
 		
-		log.warn("Find All Characters: " + ryzomCharacterRepository.findAllCharacters().toString());
+		log.warn("Find All Characters: " + ryzomCharacterRepository.findAll().toString());
 		
 	}
 }

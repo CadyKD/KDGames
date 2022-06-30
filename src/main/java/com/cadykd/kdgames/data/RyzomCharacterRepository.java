@@ -10,9 +10,6 @@ import java.util.Optional;
 
 @Repository
 public interface RyzomCharacterRepository extends JpaRepository<RyzomCharacter, String> {
-	@Query(value = "select c.characterName, c.race, c.gender, c.user from characters as c where c.user = :userName", nativeQuery = true)
+	@Query(value = "select * from users_characters as uc where uc.user_name = :userName", nativeQuery = true)
 	List<RyzomCharacter> findUserCharacters(String userName);
-	
-	@Query(value = "select * from characters", nativeQuery = true)
-	List<RyzomCharacter> findAllCharacters();
 }

@@ -44,7 +44,9 @@ public class RyzomCharacter {
 	}
 	
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinColumn(name = "userName")
+	@JoinTable(name = "users_characters",
+			joinColumns = @JoinColumn(name = "characterName"),
+			inverseJoinColumns = @JoinColumn(name = "userName"))
 	User user;
 	
 	// Each character can have only one skill tree
