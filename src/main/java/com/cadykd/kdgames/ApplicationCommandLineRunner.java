@@ -1,10 +1,13 @@
 package com.cadykd.kdgames;
 
 import com.cadykd.kdgames.data.RyzomCharacterRepository;
+import com.cadykd.kdgames.data.SkillTreeRepository;
 import com.cadykd.kdgames.data.UserRepository;
 import com.cadykd.kdgames.models.RyzomCharacter;
+import com.cadykd.kdgames.models.SkillTree;
 import com.cadykd.kdgames.models.User;
 import com.cadykd.kdgames.services.RyzomCharacterService;
+import com.cadykd.kdgames.services.SkillTreeService;
 import com.cadykd.kdgames.services.UserService;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
@@ -23,20 +26,27 @@ public class ApplicationCommandLineRunner implements CommandLineRunner {
 	// Initialize services
 	UserService userService;
 	RyzomCharacterService ryzomCharacterService;
+	SkillTreeService skillTreeService;
+	
 	// Initialize Repositories
 	UserRepository userRepository;
 	RyzomCharacterRepository ryzomCharacterRepository;
+	SkillTreeRepository skillTreeRepository;
+	
 	// Initialize constants
 	static final String BAYTHAN = "Baythan";
 	static final String WHYSPER = "Whysper";
 	
 	// Initialize application
 	@Autowired
-	public ApplicationCommandLineRunner(UserService userService, RyzomCharacterService ryzomCharacterService, UserRepository userRepository, RyzomCharacterRepository ryzomCharacterRepository) {
+	public ApplicationCommandLineRunner(UserService userService, RyzomCharacterService ryzomCharacterService, SkillTreeService skillTreeService,
+	                                    UserRepository userRepository, RyzomCharacterRepository ryzomCharacterRepository, SkillTreeRepository skillTreeRepository) {
 		this.userService = userService;
 		this.ryzomCharacterService = ryzomCharacterService;
+		this.skillTreeService = skillTreeService;
 		this.userRepository = userRepository;
 		this.ryzomCharacterRepository = ryzomCharacterRepository;
+		this.skillTreeRepository = skillTreeRepository;
 	}
 	
 	@PostConstruct
@@ -51,9 +61,13 @@ public class ApplicationCommandLineRunner implements CommandLineRunner {
 		
 		ryzomCharacterService.saveOrUpdate(new RyzomCharacter(BAYTHAN, RyzomCharacter.CharacterRace.MATIS, RyzomCharacter.CharacterGender.MALE));
 		ryzomCharacterService.saveOrUpdate(new RyzomCharacter(WHYSPER, RyzomCharacter.CharacterRace.FYROS, RyzomCharacter.CharacterGender.FEMALE));
+
 		try {
 			userService.addCharacterToUser(BAYTHAN, ryzomCharacterService.findByCharacterName(WHYSPER));
 			userService.addCharacterToUser("CadyKD", ryzomCharacterService.findByCharacterName(BAYTHAN));
+			
+			ryzomCharacterService.addSkillTreeToCharacter(BAYTHAN, new SkillTree());
+			ryzomCharacterService.addSkillTreeToCharacter(WHYSPER, new SkillTree());
 		} catch (NoSuchElementException ex){
 			log.error("Couldn't add character to user!");
 			ex.printStackTrace();

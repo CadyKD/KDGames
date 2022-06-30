@@ -41,12 +41,12 @@ public class SkillTreeService {
 		skillTreeRepository.delete(skillTree);
 	}
 	
-	// Join a skill node to its skill tree
-	@Transactional(rollbackOn = {NoSuchElementException.class})
-	public void addSkillNodeToSkillTree(Integer treeId, SkillTreeNode skillNode) throws NoSuchElementException{
-		SkillTree skillTree = skillTreeRepository.findById(treeId).orElseThrow();
-		skillNode = skillNodeRepository.save(skillNode);
-		skillTree.addSkillNode(skillNode);
-		skillTreeRepository.save(skillTree);
-	}
+//	// Join a skill node to its skill tree
+//	@Transactional(rollbackOn = {NoSuchElementException.class})
+//	public void addSkillNodeToSkillTree(Integer treeId, SkillTreeNode skillNode) throws NoSuchElementException{
+//		SkillTree skillTree = skillTreeRepository.findById(treeId).orElseThrow();
+//		skillNode = skillNodeRepository.save(skillNode);
+//		skillTree.addSkillNode(skillNode);
+//		skillTreeRepository.save(skillTree);
+//	}
 }

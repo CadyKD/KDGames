@@ -1,12 +1,12 @@
 package com.cadykd.kdgames.models;
 
-import com.cadykd.kdgames.services.UserService;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.Objects;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -15,7 +15,7 @@ import javax.validation.constraints.NotNull;
 @Slf4j
 @ToString
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Table(name = "character")
+@Table(name = "characters")
 @Entity
 // This class is to hold character data for RyzomTools
 public class RyzomCharacter {
@@ -24,7 +24,7 @@ public class RyzomCharacter {
 	String characterName;
 	
 	@NotNull
-	@Enumerated
+	@Enumerated(EnumType.STRING)
 	@Column(nullable = false)
 	CharacterRace race;
 	public enum CharacterRace {
@@ -35,7 +35,7 @@ public class RyzomCharacter {
 	}
 	
 	@NotNull
-	@Enumerated
+	@Enumerated(EnumType.STRING)
 	@Column(nullable = false)
 	CharacterGender gender;
 	public enum CharacterGender {
@@ -44,13 +44,14 @@ public class RyzomCharacter {
 	}
 	
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name = "userName")
 	User user;
 	
+	// Each character can have only one skill tree
+	@ToString.Exclude
 	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-	@JoinTable(name = "character_skill_tree",
-			joinColumns = @JoinColumn(name = "character_name"),
-			inverseJoinColumns = @JoinColumn(name = "tree_id"))
-	SkillTree skillTree;
+	@JoinColumn(name = "id")
+	SkillTree characterSkillTree;
 	
 	public RyzomCharacter(String characterName, CharacterRace race, CharacterGender gender) {
 		this.characterName = characterName;
@@ -58,11 +59,20 @@ public class RyzomCharacter {
 		this.gender = gender;
 	}
 	
-	public void addUser(User user){
-		this.user = user;
+	public void addSkillTree(SkillTree skillTree) {
+		this.characterSkillTree = skillTree;
 	}
 	
-	public void addSkillTree(SkillTree skillTree) {
-		this.skillTree = skillTree;
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		RyzomCharacter that = (RyzomCharacter) o;
+		return characterName.equals(that.characterName) && race == that.race && gender == that.gender && user.equals(that.user);
+	}
+	
+	@Override
+	public int hashCode() {
+		return Objects.hash(characterName, race, gender, user);
 	}
 }

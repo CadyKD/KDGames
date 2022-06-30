@@ -16,8 +16,19 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.MariaDB103Dialect
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: create
     open-in-view: false
+    
+logging:
+  level:
+    root: INFO
+    com.cadykd.kdgames: INFO
+    org:
+      hibernate:
+        SQL: DEBUG
+        type:
+          descriptor:
+            sql: INFO
 
 #spring.h2.console.enabled=true
 #spring.datasource.url=jdbc:h2:mem:test

@@ -18,7 +18,7 @@ import java.util.Set;
 @Slf4j
 @ToString
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Table(name = "Users")
+@Table(name = "users")
 @Entity
 // User class, for people who want to access RyzomTools and play minigames
 public class User {
@@ -41,10 +41,7 @@ public class User {
 	}
 	
 	// One user may have many characters
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinTable(name = "user_characters",
-			joinColumns = @JoinColumn(name = "user_name"),
-			inverseJoinColumns = @JoinColumn(name = "character_name"))
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	Set<RyzomCharacter> ryzomCharacters = new LinkedHashSet<>();
 	
 	// Encryption for user passwords
@@ -57,7 +54,6 @@ public class User {
 	// Add a character to the set of characters a user has
 	public void addCharacter(RyzomCharacter ryzomCharacter) {
 		ryzomCharacters.add(ryzomCharacter);
-		ryzomCharacter.addUser(this);
 	}
 	
 	@Override

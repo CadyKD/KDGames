@@ -5,7 +5,6 @@ import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.Objects;
 
 @NoArgsConstructor
@@ -15,7 +14,7 @@ import java.util.Objects;
 @Slf4j
 @ToString
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Table(name = "Skills")
+@Table(name = "skills")
 @Entity
 // This class is to hold skill data for RyzomTools SkillTrees
 public class SkillTreeNode {
@@ -23,35 +22,28 @@ public class SkillTreeNode {
 	@Id
 	String skillName;
 	String title;
-	@ManyToOne
-	@JoinColumn(name = "ParentSkillName")
-	SkillTreeNode parentSkill = null;
-	List<SkillTreeNode> childSkills = null;
 	int minLevel;
 	int maxLevel;
 	int currentLevel;
-	int sortOrder;
+	String sortOrder;
 	
-	// Check if the current node is a root skill or child skill
-	public boolean isRootNode() {
-		return this.getParentSkill() == null;
-	}
-	
-	// check if the current node has child skills
-	public boolean hasChildSkills() {
-		return this.childSkills.isEmpty();
-	}
+	@ToString.Exclude
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinTable(name = "tree_skills",
+			joinColumns = @JoinColumn(name = "id"),
+			inverseJoinColumns = @JoinColumn(name = "skills_skillName"))
+	SkillTree skillTree;
 	
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 		SkillTreeNode that = (SkillTreeNode) o;
-		return minLevel == that.minLevel && maxLevel == that.maxLevel && currentLevel == that.currentLevel && sortOrder == that.sortOrder && skillName.equals(that.skillName) && title.equals(that.title) && Objects.equals(parentSkill, that.parentSkill) && Objects.equals(childSkills, that.childSkills);
+		return minLevel == that.minLevel && maxLevel == that.maxLevel && currentLevel == that.currentLevel && skillName.equals(that.skillName) && title.equals(that.title) && sortOrder.equals(that.sortOrder) && skillTree.equals(that.skillTree);
 	}
 	
 	@Override
 	public int hashCode() {
-		return Objects.hash(skillName, title, parentSkill, childSkills, minLevel, maxLevel, currentLevel, sortOrder);
+		return Objects.hash(skillName, title, minLevel, maxLevel, currentLevel, sortOrder, skillTree);
 	}
 }

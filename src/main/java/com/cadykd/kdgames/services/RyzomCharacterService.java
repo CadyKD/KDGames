@@ -62,8 +62,8 @@ public class RyzomCharacterService {
 	}
 	
 	// Find a specific character
-	public RyzomCharacter findCharacterByName(String name){
-		return ryzomCharacterRepository.findByName(name).orElseThrow();
+	public RyzomCharacter findCharacterByName(String characterName){
+		return ryzomCharacterRepository.findByCharacterName(characterName).orElseThrow();
 	}
 	
 	// Join a skill tree to its character
