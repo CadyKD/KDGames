@@ -56,7 +56,7 @@ public class UserService {
 	
 	// Join a character to its user
 	@Transactional(rollbackOn = {NoSuchElementException.class})
-	public void addCharacterToUser(String userName, RyzomCharacter ryzomCharacter) throws NoSuchElementException{
+	public void addCharacter(String userName, RyzomCharacter ryzomCharacter) throws NoSuchElementException{
 		User user = userRepository.findById(userName).orElseThrow();
 		ryzomCharacter = ryzomCharacterRepository.save(ryzomCharacter);
 		user.addCharacter(ryzomCharacter);

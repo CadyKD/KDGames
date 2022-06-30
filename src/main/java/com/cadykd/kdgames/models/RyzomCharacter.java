@@ -59,6 +59,11 @@ public class RyzomCharacter {
 		this.gender = gender;
 	}
 	
+	public void addUser(User user) {
+		this.user = user;
+		user.getRyzomCharacters().add(this);
+	}
+	
 	public void addSkillTree(SkillTree skillTree) {
 		this.characterSkillTree = skillTree;
 	}

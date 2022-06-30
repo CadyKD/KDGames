@@ -15,6 +15,4 @@ public interface RyzomCharacterRepository extends JpaRepository<RyzomCharacter, 
 	
 	@Query(value = "select * from characters", nativeQuery = true)
 	List<RyzomCharacter> findAllCharacters();
-	
-	Optional<RyzomCharacter> findByCharacterName(String characterName);
 }

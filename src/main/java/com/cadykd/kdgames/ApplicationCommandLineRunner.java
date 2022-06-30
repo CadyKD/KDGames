@@ -61,10 +61,12 @@ public class ApplicationCommandLineRunner implements CommandLineRunner {
 		
 		ryzomCharacterService.saveOrUpdate(new RyzomCharacter(BAYTHAN, RyzomCharacter.CharacterRace.MATIS, RyzomCharacter.CharacterGender.MALE));
 		ryzomCharacterService.saveOrUpdate(new RyzomCharacter(WHYSPER, RyzomCharacter.CharacterRace.FYROS, RyzomCharacter.CharacterGender.FEMALE));
-
+		
 		try {
-			userService.addCharacterToUser(BAYTHAN, ryzomCharacterService.findByCharacterName(WHYSPER));
-			userService.addCharacterToUser("CadyKD", ryzomCharacterService.findByCharacterName(BAYTHAN));
+			userService.addCharacter(BAYTHAN, ryzomCharacterService.findByCharacterName(WHYSPER));
+			ryzomCharacterService.findByCharacterName(WHYSPER).addUser(userService.findByUserName(BAYTHAN));
+			userService.addCharacter("CadyKD", ryzomCharacterService.findByCharacterName(BAYTHAN));
+			ryzomCharacterService.findByCharacterName(BAYTHAN).addUser(userService.findByUserName("CadyKD"));
 			
 			ryzomCharacterService.addSkillTreeToCharacter(BAYTHAN, new SkillTree());
 			ryzomCharacterService.addSkillTreeToCharacter(WHYSPER, new SkillTree());
@@ -77,6 +79,10 @@ public class ApplicationCommandLineRunner implements CommandLineRunner {
 		}
 		log.info("Find All Users Sorted By Name Desc");
 		log.warn(userService.findAllSortedBy(Sort.by(Sort.Direction.DESC, "userName")).toString());
+		
+//		log.info("Find All Characters For Baythan");
+//		log.warn(ryzomCharacterService.getUserCharacters(BAYTHAN).toString());
+		
 		
 		log.warn("Find All Characters: " + ryzomCharacterRepository.findAllCharacters().toString());
 		

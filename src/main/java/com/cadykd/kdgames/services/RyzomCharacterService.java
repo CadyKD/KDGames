@@ -48,7 +48,7 @@ public class RyzomCharacterService {
 	// Save new or make changes to a character
 	public void saveOrUpdate(RyzomCharacter ryzomCharacter){
 		ryzomCharacterRepository.save(ryzomCharacter);
-		log.info(String.format("Ryzom Character Generated: %s ", ryzomCharacter.getCharacterName()));
+		log.info(String.format("Ryzom Character Generated: %s ", ryzomCharacter.toString()));
 	}
 	
 	// Remove a character from the database
@@ -59,11 +59,6 @@ public class RyzomCharacterService {
 	// List all characters a specific user added
 	public List<RyzomCharacter> getUserCharacters(String userName){
 		return ryzomCharacterRepository.findUserCharacters(userName);
-	}
-	
-	// Find a specific character
-	public RyzomCharacter findCharacterByName(String characterName){
-		return ryzomCharacterRepository.findByCharacterName(characterName).orElseThrow();
 	}
 	
 	// Join a skill tree to its character
