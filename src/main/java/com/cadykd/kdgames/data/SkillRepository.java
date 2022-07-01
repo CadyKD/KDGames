@@ -1,9 +1,9 @@
 package com.cadykd.kdgames.data;
 
-import com.cadykd.kdgames.models.SkillTree;
+import com.cadykd.kdgames.models.Skill;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface SkillTreeRepository extends JpaRepository<SkillTree, Integer> {
+public interface SkillRepository extends JpaRepository<Skill, String> {
 }

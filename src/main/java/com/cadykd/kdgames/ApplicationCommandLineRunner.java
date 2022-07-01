@@ -1,13 +1,10 @@
 package com.cadykd.kdgames;
 
 import com.cadykd.kdgames.data.RyzomCharacterRepository;
-import com.cadykd.kdgames.data.SkillTreeRepository;
 import com.cadykd.kdgames.data.UserRepository;
 import com.cadykd.kdgames.models.RyzomCharacter;
-import com.cadykd.kdgames.models.SkillTree;
 import com.cadykd.kdgames.models.User;
 import com.cadykd.kdgames.services.RyzomCharacterService;
-import com.cadykd.kdgames.services.SkillTreeService;
 import com.cadykd.kdgames.services.UserService;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
@@ -26,27 +23,23 @@ public class ApplicationCommandLineRunner implements CommandLineRunner {
 	// Initialize services
 	UserService userService;
 	RyzomCharacterService ryzomCharacterService;
-	SkillTreeService skillTreeService;
 	
 	// Initialize Repositories
 	UserRepository userRepository;
 	RyzomCharacterRepository ryzomCharacterRepository;
-	SkillTreeRepository skillTreeRepository;
 	
 	// Initialize constants
-	static final String BAYTHAN = "Baythan";
-	static final String WHYSPER = "Whysper";
+//	static final String BAYTHAN = "Baythan";
+//	static final String WHYSPER = "Whysper";
 	
 	// Initialize application
 	@Autowired
-	public ApplicationCommandLineRunner(UserService userService, RyzomCharacterService ryzomCharacterService, SkillTreeService skillTreeService,
-	                                    UserRepository userRepository, RyzomCharacterRepository ryzomCharacterRepository, SkillTreeRepository skillTreeRepository) {
+	public ApplicationCommandLineRunner(UserService userService, RyzomCharacterService ryzomCharacterService,
+	                                    UserRepository userRepository, RyzomCharacterRepository ryzomCharacterRepository) {
 		this.userService = userService;
 		this.ryzomCharacterService = ryzomCharacterService;
-		this.skillTreeService = skillTreeService;
 		this.userRepository = userRepository;
 		this.ryzomCharacterRepository = ryzomCharacterRepository;
-		this.skillTreeRepository = skillTreeRepository;
 	}
 	
 	@PostConstruct
@@ -60,8 +53,10 @@ public class ApplicationCommandLineRunner implements CommandLineRunner {
 		userService.saveOrUpdate(new User("CadyKD", "CadyKD@gmail.com", "kdgamesCadyKD"));
 		
 		try {
-			ryzomCharacterService.saveOrUpdate(new RyzomCharacter(BAYTHAN, RyzomCharacter.CharacterRace.MATIS, RyzomCharacter.CharacterGender.MALE, userService.findUserByName("CadyKD")));
-			ryzomCharacterService.saveOrUpdate(new RyzomCharacter(WHYSPER, RyzomCharacter.CharacterRace.FYROS, RyzomCharacter.CharacterGender.FEMALE, userService.findUserByName("BaythanKD")));
+			ryzomCharacterService.saveOrUpdate(new RyzomCharacter("Baythan", RyzomCharacter.CharacterRace.MATIS, RyzomCharacter.CharacterGender.MALE, userService.findUserByName("BaythanKD")));
+			ryzomCharacterService.saveOrUpdate(new RyzomCharacter("Whysper", RyzomCharacter.CharacterRace.FYROS, RyzomCharacter.CharacterGender.FEMALE, userService.findUserByName("BaythanKD")));
+			ryzomCharacterService.saveOrUpdate(new RyzomCharacter("Airyn", RyzomCharacter.CharacterRace.TRYKER, RyzomCharacter.CharacterGender.FEMALE, userService.findUserByName("CadyKD")));
+			ryzomCharacterService.saveOrUpdate(new RyzomCharacter("Jason", RyzomCharacter.CharacterRace.ZORAI, RyzomCharacter.CharacterGender.MALE, userService.findUserByName("CadyKD")));
 		} catch (NoSuchElementException ex){
 			log.error("Couldn't add character to user!");
 			ex.printStackTrace();
@@ -73,7 +68,6 @@ public class ApplicationCommandLineRunner implements CommandLineRunner {
 		log.warn(userService.findAllSortedBy(Sort.by(Sort.Direction.DESC, "userName")).toString());
 		
 //		log.warn("Find All Characters For BaythanKD: "+ ryzomCharacterRepository.findUserCharacters("BaythanKD").toString());
-		
 		
 		log.warn("Find All Characters: " + ryzomCharacterRepository.findAll().toString());
 		
