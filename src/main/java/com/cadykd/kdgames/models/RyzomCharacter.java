@@ -6,7 +6,8 @@ import lombok.extern.slf4j.Slf4j;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.Objects;
+import java.util.ArrayList;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -53,27 +54,18 @@ public class RyzomCharacter {
 	
 	// Each character can have only one skill tree
 	@ToString.Exclude
-	@OneToOne(mappedBy = "ryzomCharacter", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-	@PrimaryKeyJoinColumn
-	SkillTree characterSkillTree = new SkillTree(this.characterName, this);
+	@OneToMany(mappedBy = "ryzomCharacter", cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.DETACH}, fetch = FetchType.EAGER)
+	List<Skill> skillTree = new ArrayList<>();
 	
 	public RyzomCharacter(String characterName, CharacterRace race, CharacterGender gender, User user) {
 		this.characterName = characterName;
 		this.race = race;
 		this.gender = gender;
 		this.user = user;
+		this.skillTree.add(new Skill("Fight", "Fighter Apprentice", 1, 20, 1, "0.0.0", this));
+		this.skillTree.add(new Skill("Magic", "Magician Apprentice", 1, 20, 1, "0.0.0", this));
+		this.skillTree.add(new Skill("Craft", "Crafter Apprentice", 1, 20, 1, "0.0.0", this));
+		this.skillTree.add(new Skill("Harvest", "Forager Apprentice", 1, 20, 1, "0.0.0", this));
 	}
 	
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
-		RyzomCharacter that = (RyzomCharacter) o;
-		return characterName.equals(that.characterName) && race == that.race && gender == that.gender;
-	}
-	
-	@Override
-	public int hashCode() {
-		return Objects.hash(characterName, race, gender);
-	}
 }

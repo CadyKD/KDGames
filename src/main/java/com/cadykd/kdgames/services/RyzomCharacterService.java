@@ -1,10 +1,8 @@
 package com.cadykd.kdgames.services;
 
 import com.cadykd.kdgames.data.RyzomCharacterRepository;
-import com.cadykd.kdgames.data.SkillTreeRepository;
 import com.cadykd.kdgames.data.UserRepository;
 import com.cadykd.kdgames.models.RyzomCharacter;
-import com.cadykd.kdgames.models.SkillTree;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
@@ -24,14 +22,12 @@ public class RyzomCharacterService {
 	// Initialize Fields
 	UserRepository userRepository;
 	RyzomCharacterRepository ryzomCharacterRepository;
-	SkillTreeRepository skillTreeRepository;
 	
 	// Initialize Service
 	@Autowired
-	public RyzomCharacterService(UserRepository userRepository, RyzomCharacterRepository ryzomCharacterRepository, SkillTreeRepository skillTreeRepository) {
+	public RyzomCharacterService(UserRepository userRepository, RyzomCharacterRepository ryzomCharacterRepository) {
 		this.userRepository = userRepository;
 		this.ryzomCharacterRepository = ryzomCharacterRepository;
-		this.skillTreeRepository = skillTreeRepository;
 	}
 	
 	// Find all characters in database
@@ -61,12 +57,4 @@ public class RyzomCharacterService {
 		return ryzomCharacterRepository.findUserCharacters(userName);
 	}
 	
-	// Join a skill tree to its character
-	@Transactional(rollbackOn = {NoSuchElementException.class})
-	public void addSkillTreeToCharacter(String charName, SkillTree skillTree) throws NoSuchElementException{
-		RyzomCharacter ryzomCharacter = ryzomCharacterRepository.findById(charName).orElseThrow();
-		skillTree = skillTreeRepository.save(skillTree);
-		ryzomCharacter.addSkillTree(skillTree);
-		ryzomCharacterRepository.save(ryzomCharacter);
-	}
 }
