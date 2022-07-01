@@ -19,6 +19,9 @@ import javax.persistence.*;
 public class Skill {
 	// Table Fields
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	Long id;
+	
 	String skillName;
 	String title;
 	int minLevel;
@@ -33,4 +36,13 @@ public class Skill {
 			inverseJoinColumns = @JoinColumn(name = "charName"))
 	RyzomCharacter ryzomCharacter;
 	
+	public Skill(String skillName, String title, int minLevel, int maxLevel, int currentLevel, String sortOrder, RyzomCharacter ryzomCharacter) {
+		this.skillName = skillName;
+		this.title = title;
+		this.minLevel = minLevel;
+		this.maxLevel = maxLevel;
+		this.currentLevel = currentLevel;
+		this.sortOrder = sortOrder;
+		this.ryzomCharacter = ryzomCharacter;
+	}
 }
