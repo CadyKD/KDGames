@@ -21,6 +21,7 @@ import java.util.Objects;
 public class RyzomCharacter {
 	// Table Fields
 	@Id
+	@Column(name = "charName")
 	String characterName;
 	
 	@NotNull
@@ -43,6 +44,7 @@ public class RyzomCharacter {
 		FEMALE
 	}
 	
+	@ToString.Exclude
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinTable(name = "users_characters",
 			joinColumns = @JoinColumn(name = "characterName"),
@@ -51,23 +53,15 @@ public class RyzomCharacter {
 	
 	// Each character can have only one skill tree
 	@ToString.Exclude
-	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-	@JoinColumn(name = "id")
-	SkillTree characterSkillTree;
+	@OneToOne(mappedBy = "ryzomCharacter", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+	@PrimaryKeyJoinColumn
+	SkillTree characterSkillTree = new SkillTree(this.characterName, this);
 	
-	public RyzomCharacter(String characterName, CharacterRace race, CharacterGender gender) {
+	public RyzomCharacter(String characterName, CharacterRace race, CharacterGender gender, User user) {
 		this.characterName = characterName;
 		this.race = race;
 		this.gender = gender;
-	}
-	
-	public void addUser(User user) {
 		this.user = user;
-		user.getRyzomCharacters().add(this);
-	}
-	
-	public void addSkillTree(SkillTree skillTree) {
-		this.characterSkillTree = skillTree;
 	}
 	
 	@Override
@@ -75,11 +69,11 @@ public class RyzomCharacter {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 		RyzomCharacter that = (RyzomCharacter) o;
-		return characterName.equals(that.characterName) && race == that.race && gender == that.gender && user.equals(that.user);
+		return characterName.equals(that.characterName) && race == that.race && gender == that.gender;
 	}
 	
 	@Override
 	public int hashCode() {
-		return Objects.hash(characterName, race, gender, user);
+		return Objects.hash(characterName, race, gender);
 	}
 }

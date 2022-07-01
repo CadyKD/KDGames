@@ -56,20 +56,12 @@ public class ApplicationCommandLineRunner implements CommandLineRunner {
 	
 	@Override
 	public void run(String... args) throws Exception {
-		userService.saveOrUpdate(new User(BAYTHAN, "JediKnightKD@gmail.com", "kdgamesBaythan"));
+		userService.saveOrUpdate(new User("BaythanKD", "JediKnightKD@gmail.com", "kdgamesBaythanKD"));
 		userService.saveOrUpdate(new User("CadyKD", "CadyKD@gmail.com", "kdgamesCadyKD"));
 		
-		ryzomCharacterService.saveOrUpdate(new RyzomCharacter(BAYTHAN, RyzomCharacter.CharacterRace.MATIS, RyzomCharacter.CharacterGender.MALE));
-		ryzomCharacterService.saveOrUpdate(new RyzomCharacter(WHYSPER, RyzomCharacter.CharacterRace.FYROS, RyzomCharacter.CharacterGender.FEMALE));
-		
 		try {
-			userService.addCharacter(BAYTHAN, ryzomCharacterService.findByCharacterName(WHYSPER));
-//			ryzomCharacterService.findByCharacterName(WHYSPER).addUser(userService.findByUserName(BAYTHAN));
-			userService.addCharacter("CadyKD", ryzomCharacterService.findByCharacterName(BAYTHAN));
-//			ryzomCharacterService.findByCharacterName(BAYTHAN).addUser(userService.findByUserName("CadyKD"));
-			
-			ryzomCharacterService.addSkillTreeToCharacter(BAYTHAN, new SkillTree());
-			ryzomCharacterService.addSkillTreeToCharacter(WHYSPER, new SkillTree());
+			ryzomCharacterService.saveOrUpdate(new RyzomCharacter(BAYTHAN, RyzomCharacter.CharacterRace.MATIS, RyzomCharacter.CharacterGender.MALE, userService.findUserByName("CadyKD")));
+			ryzomCharacterService.saveOrUpdate(new RyzomCharacter(WHYSPER, RyzomCharacter.CharacterRace.FYROS, RyzomCharacter.CharacterGender.FEMALE, userService.findUserByName("BaythanKD")));
 		} catch (NoSuchElementException ex){
 			log.error("Couldn't add character to user!");
 			ex.printStackTrace();
@@ -80,7 +72,7 @@ public class ApplicationCommandLineRunner implements CommandLineRunner {
 		log.info("Find All Users Sorted By Name Desc");
 		log.warn(userService.findAllSortedBy(Sort.by(Sort.Direction.DESC, "userName")).toString());
 		
-		log.warn("Find All Characters For Baythan: "+ ryzomCharacterRepository.findUserCharacters(BAYTHAN).toString());
+//		log.warn("Find All Characters For BaythanKD: "+ ryzomCharacterRepository.findUserCharacters("BaythanKD").toString());
 		
 		
 		log.warn("Find All Characters: " + ryzomCharacterRepository.findAll().toString());

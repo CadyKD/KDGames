@@ -34,7 +34,7 @@ public class SkillTreeService {
 	// Save new or make changes to a skillTree
 	public void saveOrUpdate(SkillTree skillTree){
 		skillTreeRepository.save(skillTree);
-		log.info(String.format("Ryzom Skill Tree Generated: %d Character Name: %s", skillTree.getId(), skillTree.getRyzomCharacter().getCharacterName()));
+		log.info(String.format("Ryzom Skill Tree for Character Name: %s", skillTree.getRyzomCharacter().getCharacterName()));
 	}
 	
 	public void delete(SkillTree skillTree) {

@@ -20,18 +20,25 @@ import java.util.*;
 public class SkillTree {
 	// Table Fields
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	int id;
+	@Column(name = "character_name")
+	String characterName;
 	
 	// Each skill tree belongs to one character
 	@ToString.Exclude
-	@OneToOne(mappedBy = "characterSkillTree", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+	@MapsId
+	@JoinColumn(name = "character_name")
 	RyzomCharacter ryzomCharacter;
 	
 	// Each skill tree has many skills
 	@ToString.Exclude
 	@OneToMany(mappedBy = "skillTree", cascade = CascadeType.ALL)
 	List<SkillTreeNode> skillList = new ArrayList<>();
+	
+	public SkillTree(String characterName, RyzomCharacter ryzomCharacter) {
+		this.characterName = characterName;
+		this.ryzomCharacter = ryzomCharacter;
+	}
 	
 	public void addSkillNode(SkillTreeNode skillNode) {
 		this.skillList.add(skillNode);
@@ -42,11 +49,11 @@ public class SkillTree {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 		SkillTree skillTree = (SkillTree) o;
-		return id == skillTree.id && ryzomCharacter.equals(skillTree.ryzomCharacter);
+		return characterName.equals(skillTree.characterName) && ryzomCharacter.equals(skillTree.ryzomCharacter);
 	}
 	
 	@Override
 	public int hashCode() {
-		return Objects.hash(id, ryzomCharacter);
+		return Objects.hash(characterName, ryzomCharacter);
 	}
 }
