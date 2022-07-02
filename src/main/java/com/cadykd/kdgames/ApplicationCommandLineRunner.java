@@ -28,10 +28,6 @@ public class ApplicationCommandLineRunner implements CommandLineRunner {
 	UserRepository userRepository;
 	RyzomCharacterRepository ryzomCharacterRepository;
 	
-	// Initialize constants
-//	static final String BAYTHAN = "Baythan";
-//	static final String WHYSPER = "Whysper";
-	
 	// Initialize application
 	@Autowired
 	public ApplicationCommandLineRunner(UserService userService, RyzomCharacterService ryzomCharacterService,
