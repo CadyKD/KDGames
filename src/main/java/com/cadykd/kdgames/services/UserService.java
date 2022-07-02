@@ -37,12 +37,6 @@ public class UserService {
 		return userRepository.findAll();
 	}
 	
-	// Locate user by username
-	@Transactional(rollbackOn = {NoSuchElementException.class})
-	public User findByUserName(String userName) throws NoSuchElementException {
-		return userRepository.findById(userName).orElseThrow();
-	}
-	
 	// Save new or make changes to a user
 	public void saveOrUpdate(User u){
 		log.info(u.toString());
@@ -56,11 +50,16 @@ public class UserService {
 	
 	// Join a character to its user
 	@Transactional(rollbackOn = {NoSuchElementException.class})
-	public void addCharacter(String userName, RyzomCharacter ryzomCharacter) throws NoSuchElementException{
+	public void addCharacter(String userName, String characterName) throws NoSuchElementException{
 		User user = userRepository.findById(userName).orElseThrow();
+		RyzomCharacter ryzomCharacter = ryzomCharacterRepository.findById(characterName).orElseThrow();
 		ryzomCharacter = ryzomCharacterRepository.save(ryzomCharacter);
-		user.addCharacter(ryzomCharacter);
+		user.addToCharacters(ryzomCharacter);
 		userRepository.save(user);
+	}
+	
+	public User findUserByName(String userName) {
+		return userRepository.findById(userName).orElseThrow();
 	}
 	
 	public List<User> findAllSortedBy(Sort sort){

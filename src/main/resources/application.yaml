@@ -18,6 +18,15 @@ spring:
     hibernate:
       ddl-auto: create
     open-in-view: false
+  thymeleaf: # Thymeleaf
+    cache: false
+    mode: CSS
+    encoding: UTF-8
+    prefix: file:src/main/resources/templates/
+  resources: # Static resources
+    static-locations: file:src/main/resources/static/
+    cache:
+      period: 0
     
 logging:
   level:

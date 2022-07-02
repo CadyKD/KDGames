@@ -10,5 +10,5 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Slf4j
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 @RequestMapping(value = "skills")
-public class SkillNodeController {
+public class SkillController {
 }

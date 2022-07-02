@@ -41,6 +41,7 @@ public class User {
 	}
 	
 	// One user may have many characters
+	@ToString.Exclude
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	Set<RyzomCharacter> ryzomCharacters = new LinkedHashSet<>();
 	
@@ -52,7 +53,7 @@ public class User {
 	}
 	
 	// Add a character to the set of characters a user has
-	public void addCharacter(RyzomCharacter ryzomCharacter) {
+	public void addToCharacters(RyzomCharacter ryzomCharacter) {
 		ryzomCharacters.add(ryzomCharacter);
 	}
 	
