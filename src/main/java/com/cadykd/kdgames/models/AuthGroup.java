@@ -21,9 +21,15 @@ public class AuthGroup {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	int id;
 	@NonNull
-	String aUserName;
+	String userName;
 	@NonNull
-	String aEmail;
+	String email;
 	@NonNull
-	String aAuthGroup;
+	String authGroup;
+	
+	public AuthGroup(User user, String authGroup) {
+		this.userName = user.getUserName();
+		this.email = user.getEmail();
+		this.authGroup = authGroup;
+	}
 }

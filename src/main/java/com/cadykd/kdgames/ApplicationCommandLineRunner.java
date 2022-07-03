@@ -1,7 +1,9 @@
 package com.cadykd.kdgames;
 
+import com.cadykd.kdgames.data.AuthGroupRepository;
 import com.cadykd.kdgames.data.RyzomCharacterRepository;
 import com.cadykd.kdgames.data.UserRepository;
+import com.cadykd.kdgames.models.AuthGroup;
 import com.cadykd.kdgames.models.RyzomCharacter;
 import com.cadykd.kdgames.models.User;
 import com.cadykd.kdgames.services.RyzomCharacterService;
@@ -25,17 +27,17 @@ public class ApplicationCommandLineRunner implements CommandLineRunner {
 	RyzomCharacterService ryzomCharacterService;
 	
 	// Initialize Repositories
-	UserRepository userRepository;
 	RyzomCharacterRepository ryzomCharacterRepository;
+	AuthGroupRepository authGroupRepository;
 	
 	// Initialize application
 	@Autowired
 	public ApplicationCommandLineRunner(UserService userService, RyzomCharacterService ryzomCharacterService,
-	                                    UserRepository userRepository, RyzomCharacterRepository ryzomCharacterRepository) {
+	                                    RyzomCharacterRepository ryzomCharacterRepository, AuthGroupRepository authGroupRepository) {
 		this.userService = userService;
 		this.ryzomCharacterService = ryzomCharacterService;
-		this.userRepository = userRepository;
 		this.ryzomCharacterRepository = ryzomCharacterRepository;
+		this.authGroupRepository = authGroupRepository;
 	}
 	
 	@PostConstruct
@@ -45,14 +47,18 @@ public class ApplicationCommandLineRunner implements CommandLineRunner {
 	
 	@Override
 	public void run(String... args) throws Exception {
-		userService.saveOrUpdate(new User("BaythanKD", "JediKnightKD@gmail.com", "kdgamesBaythanKD"));
 		userService.saveOrUpdate(new User("CadyKD", "CadyKD@gmail.com", "kdgamesCadyKD"));
+		userService.saveOrUpdate(new User("BaythanKD", "JediKnightKD@gmail.com", "kdgamesBaythanKD"));
+		
+		authGroupRepository.save(new AuthGroup(userService.findUserByName("CadyKD"), "ROLE_ADMIN"));
+		authGroupRepository.save(new AuthGroup(userService.findUserByName("CadyKD"), "ROLE_USER"));
+		authGroupRepository.save(new AuthGroup(userService.findUserByName("BaythanKD"), "ROLE_USER"));
 		
 		try {
-			ryzomCharacterService.saveOrUpdate(new RyzomCharacter("Baythan", RyzomCharacter.CharacterRace.MATIS, RyzomCharacter.CharacterGender.MALE, userService.findUserByName("BaythanKD")));
-			ryzomCharacterService.saveOrUpdate(new RyzomCharacter("Whysper", RyzomCharacter.CharacterRace.FYROS, RyzomCharacter.CharacterGender.FEMALE, userService.findUserByName("BaythanKD")));
-			ryzomCharacterService.saveOrUpdate(new RyzomCharacter("Airyn", RyzomCharacter.CharacterRace.TRYKER, RyzomCharacter.CharacterGender.FEMALE, userService.findUserByName("CadyKD")));
-			ryzomCharacterService.saveOrUpdate(new RyzomCharacter("Jason", RyzomCharacter.CharacterRace.ZORAI, RyzomCharacter.CharacterGender.MALE, userService.findUserByName("CadyKD")));
+			ryzomCharacterService.saveOrUpdate(new RyzomCharacter("Baythan", RyzomCharacter.CharacterRace.MATIS, RyzomCharacter.CharacterGender.MALE, userService.findUserByName("CadyKD")));
+			ryzomCharacterService.saveOrUpdate(new RyzomCharacter("Whysper", RyzomCharacter.CharacterRace.FYROS, RyzomCharacter.CharacterGender.FEMALE, userService.findUserByName("CadyKD")));
+			ryzomCharacterService.saveOrUpdate(new RyzomCharacter("Airyn", RyzomCharacter.CharacterRace.TRYKER, RyzomCharacter.CharacterGender.FEMALE, userService.findUserByName("BaythanKD")));
+			ryzomCharacterService.saveOrUpdate(new RyzomCharacter("Jason", RyzomCharacter.CharacterRace.ZORAI, RyzomCharacter.CharacterGender.MALE, userService.findUserByName("BaythanKD")));
 		} catch (NoSuchElementException ex){
 			log.error("Couldn't add character to user!");
 			ex.printStackTrace();

@@ -28,7 +28,7 @@ public class AppUserPrincipal implements Serializable, UserDetails {
 		// disallow duplications
 		Set<SimpleGrantedAuthority> authorities = new HashSet<>();
 		// loop through authGroup list and adding each role to spring security Simple Granted Authority object
-		authGroup.forEach(auth -> authorities.add(new SimpleGrantedAuthority(auth.getAAuthGroup())));
+		authGroup.forEach(auth -> authorities.add(new SimpleGrantedAuthority(auth.getAuthGroup())));
 		// return the authorities
 		return authorities;
 	}

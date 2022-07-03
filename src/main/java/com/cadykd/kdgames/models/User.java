@@ -3,6 +3,7 @@ package com.cadykd.kdgames.models;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 // uncomment when security is added
 //import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
@@ -35,9 +36,7 @@ public class User {
 	public User(String userName, String email, String password) {
 		this.userName = userName;
 		this.email = email;
-		// Delete first line under this and uncomment second line when security is added
-		this.password = password;
-		//this.password = new BCryptPasswordEncoder(4).encode(password);
+		this.password = new BCryptPasswordEncoder(4).encode(password);
 	}
 	
 	// One user may have many characters
@@ -47,9 +46,7 @@ public class User {
 	
 	// Encryption for user passwords
 	public void setPassword(String password) {
-		// Delete first line under this and uncomment second line when security is added
-		this.password = password;
-		//this.password = new BCryptPasswordEncoder(4).encode(password);
+		this.password = new BCryptPasswordEncoder(4).encode(password);
 	}
 	
 	// Add a character to the set of characters a user has
