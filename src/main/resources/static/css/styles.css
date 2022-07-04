@@ -9,6 +9,10 @@ body {
   color: #FFFFFF;
 }
 
+.KDG-logo {
+  blah:;
+}
+
 .navbar-nav .nav-link {
   color: #FFFFFF8C;
 }
@@ -29,4 +33,8 @@ body {
 .navbar-text a:hover,
 .navbar-text a:focus {
   color: #FFFFFF;
+}
+
+.white-background{
+  background-color: #FFFFFF;
 }
