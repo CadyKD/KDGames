@@ -23,13 +23,13 @@ public class AuthGroup {
 	@NonNull
 	String userName;
 	@NonNull
-	String email;
+	String aEmail;
 	@NonNull
 	String authGroup;
 	
 	public AuthGroup(User user, String authGroup) {
 		this.userName = user.getUserName();
-		this.email = user.getEmail();
+		this.aEmail = user.getEmail();
 		this.authGroup = authGroup;
 	}
 }

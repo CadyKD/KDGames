@@ -4,10 +4,10 @@
 <div th:replace="modules/head :: head" />
 <body>
 <!-- Navbar-->
-<div th:replace="modules/nav :: nav" />
+<div th:replace="modules/navbar :: nav" />
 <!-- Header-->
-<header class="bg-dark py-5">
-	<div class="container px-5 vh-100">
+<header class="py-5">
+	<div class="container px-5">
 		<div class="row gx-5 justify-content-center">
 			<div class="col-lg-6">
 				<div th:if="${param.error}">

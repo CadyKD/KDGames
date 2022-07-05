@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
 	<meta charset="UTF-8">
 	<title>Title</title>
@@ -7,14 +7,21 @@
 <body>
 <nav th:fragment="nav" class="navbar navbar-expand-lg navbar-dark border-bottom">
 	<div class="container px-5">
-		<a class="KDG-logo" href="#!"><img src="/assets/KDGames Logo.png" width="" height="100"></a>
+		<a class="KDG-logo" href="/index"><img src="/assets/KDGames Logo.png" width="" height="100"></a>
+		<div sec:authorize="isAuthenticated()">
+			<a class="nav-link active" aria-current="page" th:href="@{/}">User: <span sec:authentication="name"></span> Privileges: <span sec:authentication="principal.authorities"></span></a>
+		</div>
 		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			
 			<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
 				<li class="nav-item"><a class="nav-link active" aria-current="page" th:href="@{/index}">Home</a></li>
-				<li class="nav-item"><a class="nav-link" th:href="@{/ryzomtools}">Ryzom Tools</a></li>
+				<span sec:authorize="hasRole('USER')"><li class="nav-item"><a class="nav-link" th:href="@{/ryzomtools}">Ryzom Tools</a></li></span>
 				<li class="nav-item"><a class="nav-link" th:href="@{/about}">About</a></li>
+				<li class="nav-item">
+					<a sec:authorize="isAuthenticated()" class="nav-link" th:href="@{/logout}">Log Out</a>
+					<a sec:authorize="!isAuthenticated()" class="nav-link" th:href="@{/login}">Sign In</a>
+				</li>
 			</ul>
 		</div>
 	</div>

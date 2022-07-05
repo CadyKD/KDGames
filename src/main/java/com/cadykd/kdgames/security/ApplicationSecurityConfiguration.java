@@ -25,12 +25,10 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapter {
 	
 	AppUserDetailsService appUserDetailsService;
-	LoginFailHandler loginFailHandler;
 	
 	@Autowired
-	public ApplicationSecurityConfiguration(AppUserDetailsService appUserDetailsService, LoginFailHandler loginFailHandler) {
+	public ApplicationSecurityConfiguration(AppUserDetailsService appUserDetailsService) {
 		this.appUserDetailsService = appUserDetailsService;
-		this.loginFailHandler = loginFailHandler;
 	}
 	
 	@Bean
@@ -53,31 +51,31 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
 	
 	@Override
 	public void configure(WebSecurity web) throws Exception {
-		web.ignoring().antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/img/**");
+		web.ignoring().antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/assets/**");
 	}
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
-				.cors().and().csrf().disable()
-				.authorizeRequests()
-				.antMatchers("/admin/**").hasRole("ADMIN")
-				.antMatchers("/user").hasAnyRole("USER", "ADMIN")
-				.antMatchers("/index").permitAll()
+				.sessionManagement()
+				.sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
 				.and()
-				.formLogin().loginPage("/user/signin")
-				.usernameParameter("username")
-				.passwordParameter("password")
-				.loginProcessingUrl("/user/signin")
-				.defaultSuccessUrl("/")
-				.failureHandler(loginFailHandler)
+				.csrf().disable()
+				.authorizeRequests()
+				.antMatchers("/", "/index", "/about")
+				.permitAll()
+				.antMatchers("/ryzomtools").hasRole("USER")
+				.antMatchers("/ryzomtools/**", "/users/**", "/characters/**").hasAuthority("ROLE_ADMIN")
+				.anyRequest().authenticated()
+				.and()
+				.formLogin().loginPage("/login").usernameParameter("email").passwordParameter("password")
+				.loginProcessingUrl("/login/processing").defaultSuccessUrl("/index")
+				.failureUrl("/login?error=true").permitAll()
 				.and()
 				.logout()
 				.invalidateHttpSession(true).clearAuthentication(true)
 				.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-				.logoutSuccessUrl("/").permitAll()
-				.and()
-				.exceptionHandling().accessDeniedPage("/403");
+				.logoutSuccessUrl("/").permitAll();
 		
 	}
 }

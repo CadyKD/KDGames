@@ -18,19 +18,15 @@ import javax.validation.constraints.Pattern;
 public class UserDTO {
 	@NotNull
 	@NotEmpty(message="{NotEmpty.User.Missing}")
-	private String firstName;
-	
-	@NotNull
-	@NotEmpty(message="{NotEmpty.User.Missing}")
-	private String lastName;
-	
-	@NotNull
-	@NotEmpty(message="{NotEmpty.User.Missing}")
-	private String password;
-	private String matchingPassword;
+	private String userName;
 	
 	@Pattern(regexp = "^[_A-Za-z0-9-+]+(.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(.[A-Za-z0-9]+)*(.[A-Za-z]{2,})$", message = "{Pattern.User.Email}")
 	@NotNull
 	@NotEmpty(message = "{NotEmpty.User.Missing}")
 	private String email;
+	
+	@NotNull
+	@NotEmpty(message="{NotEmpty.User.Missing}")
+	private String password;
+	private String matchingPassword;
 }

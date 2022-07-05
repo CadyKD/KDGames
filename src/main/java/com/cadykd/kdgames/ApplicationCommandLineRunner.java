@@ -47,9 +47,11 @@ public class ApplicationCommandLineRunner implements CommandLineRunner {
 	
 	@Override
 	public void run(String... args) throws Exception {
-		userService.saveOrUpdate(new User("CadyKD", "CadyKD@gmail.com", "kdgamesCadyKD"));
-		userService.saveOrUpdate(new User("BaythanKD", "JediKnightKD@gmail.com", "kdgamesBaythanKD"));
+		userService.saveOrUpdate(new User("Admin", "admin@mail.com", "adminadmin"));
+		userService.saveOrUpdate(new User("CadyKD", "CadyKD@mail.com", "CadyKD"));
+		userService.saveOrUpdate(new User("BaythanKD", "JediKnightKD@mail.com", "BaythanKD"));
 		
+		authGroupRepository.save(new AuthGroup(userService.findUserByName("Admin"), "ROLE_ADMIN"));
 		authGroupRepository.save(new AuthGroup(userService.findUserByName("CadyKD"), "ROLE_ADMIN"));
 		authGroupRepository.save(new AuthGroup(userService.findUserByName("CadyKD"), "ROLE_USER"));
 		authGroupRepository.save(new AuthGroup(userService.findUserByName("BaythanKD"), "ROLE_USER"));

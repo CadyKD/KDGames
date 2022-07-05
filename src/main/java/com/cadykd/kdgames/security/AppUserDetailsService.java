@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 @Slf4j
@@ -28,11 +29,22 @@ public class AppUserDetailsService implements UserDetailsService {
 	}
 	
 	@Override
-	public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-		
-		List<AuthGroup> authGroupList = authGroupRepository.findByUserName(userName);
-		User u = userService.findUserByName(userName);
-		
-		return new AppUserPrincipal(u,authGroupList);
+	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+		User user = null;
+		try {
+			user = userService.findUserByEmail(email);
+		} catch (NoSuchElementException e) {
+			log.warn("Could not find user with email: " + email);
+			e.printStackTrace();
+		} catch (UsernameNotFoundException e) {
+			log.warn("Could not find user with email: " + email);
+			e.printStackTrace();
+		}
+		if (user == null) {
+			throw new UsernameNotFoundException("No user with email:" + email);
+		}
+		user = userService.findUserByEmail(email);
+		List<AuthGroup> authGroupList = authGroupRepository.findByaEmail(email);
+		return new AppUserPrincipal(user, authGroupList);
 	}
 }

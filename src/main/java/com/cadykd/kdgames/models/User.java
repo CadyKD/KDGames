@@ -20,16 +20,24 @@ import java.util.Set;
 @ToString
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Table(name = "users")
+//@NamedNativeQuery(name = "User.findByName", query = "select u.id, u.user_name, u.email, u.password from users as u where u.user_name = :username", resultSetMapping = "Mapping.findByName")
+//@SqlResultSetMapping(name = "Mapping.findByName", classes = @ConstructorResult(targetClass = User.class, columns = {@ColumnResult(name = "id"), @ColumnResult(name = "user_name"), @ColumnResult(name = "email"), @ColumnResult(name = "password")}))
+//@NamedNativeQuery(name = "User.findByEmail", query = "select u.id, u.user_name, u.email, u.password from users as u where u.email = :email", resultSetMapping = "Mapping.findByEmail")
+//@SqlResultSetMapping(name = "Mapping.findByEmail", classes = @ConstructorResult(targetClass = User.class, columns = {@ColumnResult(name = "id"), @ColumnResult(name = "user_name"), @ColumnResult(name = "email"), @ColumnResult(name = "password")}))
 @Entity
-// User class, for people who want to access RyzomTools and play minigames
+// User class, for people who want to access RyzomTools
 public class User {
 	// Table Fields
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	Integer id;
+	@NonNull
 	String userName;
 	@NonNull
 	String email;
 	@Setter(AccessLevel.NONE)
 	@NonNull
+	@Column(length=70)
 	String password;
 	
 	// Constructor
