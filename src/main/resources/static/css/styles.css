@@ -3,10 +3,12 @@
 *, *::before, *::after {
   color: #FFFFFF;
   background-color: #000000;
+  box-sizing: border-box;
 }
 
 body {
   color: #FFFFFF;
+  flex-direction: column;
 }
 
 .KDG-logo {
@@ -37,4 +39,85 @@ body {
 
 .white-background{
   background-color: #FFFFFF;
+}
+
+#game-grid-container {
+	flex:6;
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+	overflow-y: auto;
+	width: 100%;
+}
+
+.game-list-item {
+	background-color: #606060;
+	display: flex;
+	flex-direction: column;
+	width:15rem;
+	height:20rem;
+	border-radius: 10px;
+	padding: 5px;
+	margin:20px;
+	box-shadow: 5px 7px 5px #80808050;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.game-list-item .game-container {
+	background-color: #606060;
+	flex:1;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.game-list-item .img-container {
+	background-color: #606060;
+	flex:2;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+	width:100px;
+	height: 100px;
+}
+
+.game-list-item .img-container img {
+	max-height: 100%;
+}
+
+.flex-box {
+	display: flex;
+	justify-content: center;
+}
+
+.textbox {
+	display: flex;
+	flex-direction: column;
+	align-content: center;
+	width: 50%;
+}
+
+.guessbox {
+	display: flex;
+	flex-direction: row;
+	justify-content: left;
+	width: 50%;
+	margin-top: 2px;
+}
+
+
+input[type=number] {
+	width: 100px;
+	color: #000000;
+	margin-left: 5px;
+	height: 1.2rem;
+}
+
+button {
+	width: 90px;
+	color: black;
+	justify-content: center;
+	margin-top: 2px;
 }

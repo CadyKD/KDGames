@@ -1,0 +1,48 @@
+@import url("https://fonts.googleapis.com/css2?family=New+Tegomin&display=swap");
+#scoreBox {
+	font-size: 35px;
+	font-weight: bold;
+}
+
+#hiscoreBox {
+	font-size: 35px;
+	font-weight: bold;
+}
+
+#board {
+	align-self: center;
+	background: black;
+	width: 70vmin;
+	height: 70vmin;
+	border: 2px solid black;
+	display: grid;
+	grid-template-rows: repeat(18, 1fr);
+	grid-template-columns: repeat(18, 1fr);
+}
+
+.Scores {
+	align-self: center;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	width: 50%;
+}
+
+.head {
+	background: rgb(35, 185, 245);
+	border: 2px solid rgb(34, 4, 34);
+	transform: scale(1.02);
+	border-radius: 9px;
+}
+
+.snake {
+	background-color: white;
+	border: 0.25vmin solid white;
+	border-radius: 12px;
+}
+
+.food {
+	background: red;
+	border: 0.25vmin solid black;
+	border-radius: 8px;
+}

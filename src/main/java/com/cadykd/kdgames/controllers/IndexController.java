@@ -48,6 +48,12 @@ public class IndexController {
 		return "about";
 	}
 	
+	// Minigames Page
+	@GetMapping("/minigames")
+	public String minigames() {
+		return "minigames";
+	}
+	
 	// RyzomTools page
 	@GetMapping("/ryzomtools")
 	public String ryzomTools() {
