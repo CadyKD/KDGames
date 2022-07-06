@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <!-- Head-->
 <div th:replace="modules/head :: head" />
 <body>
@@ -11,7 +11,7 @@
 		<div class="row gx-5 justify-content-center">
 			<div class="col-lg-8">
 				<div class="text-center my-5">
-					<h1 class="display-4 fw-bolder text-white mb-2">Characters</h1>
+					<h1 class="display-4 fw-bolder text-white mb-2" th:text="${#authentication.getPrincipal().getUsername()} + '\'s Characters'">Users Characters</h1>
 				</div>
 			</div>
 		</div>
@@ -33,11 +33,13 @@
 						<th scope="row" th:text="${characters.characterName}"></th>
 						<td th:text="${characters.race}"></td>
 						<td th:text="${characters.gender}"></td>
-						<td ><a th:href="@{'/viewcharacter/' + ${characters.characterName}}"><i class="fa-solid fa-eye"></i></a></td>
+						<td ><a th:href="@{'/viewcharacter/' + ${characters.characterName}}"></a><i class="fa-solid fa-eye"></i>(TODO)</td>
 					</tr>
-					
 					</tbody>
 				</table>
+				<div class="d-grid gap-3 d-sm-flex justify-content-sm-center">
+					<a class="btn btn-outline-light btn-lg px-4" th:href="@{/characters/addcharacter}">Add Character</a>
+				</div>
 			</div>
 		
 		</div>

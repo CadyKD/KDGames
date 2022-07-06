@@ -49,7 +49,7 @@ public class SkillService {
 	}
 	
 	public List<Skill> getCharacterSkills(String characterName) {
-		RyzomCharacter character = ryzomCharacterRepository.findCharacterByName(characterName);
+		RyzomCharacter character = ryzomCharacterRepository.findCharacterBycharacterName(characterName);
 		return character.getSkillTree();
 	}
 }

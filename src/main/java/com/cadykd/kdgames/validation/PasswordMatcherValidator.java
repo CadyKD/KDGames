@@ -1,5 +1,6 @@
 package com.cadykd.kdgames.validation;
 
+import com.cadykd.kdgames.dto.RyzomCharacterDTO;
 import com.cadykd.kdgames.dto.UserDTO;
 
 import javax.validation.ConstraintValidator;

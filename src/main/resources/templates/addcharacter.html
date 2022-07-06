@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!-- Head-->
+<div th:replace="modules/head :: head" />
+<body>
+<!-- Navbar-->
+<div th:replace="modules/navbar :: nav" />
+<!-- Header-->
+<header class="py-5">
+	<div class="container px-5">
+		<div class="row gx-5 justify-content-center">
+			<div class="col-lg-8">
+				<div class="text-center my-5">
+					<h1 class="display-4 fw-bolder text-white mb-2"
+					th:text="'Add to ' + ${#authentication.getPrincipal().getUsername()} + '\'s Characters'">Characters</h1>
+				</div>
+			</div>
+		</div>
+		<div class="row gx-5 justify-content-center">
+			<div class="col-lg-5">
+				<form th:action="@{/characters/registernewcharacter}"  autocomplete="off" method="post">
+					<div class="input-group mb-3">
+						<input type="text" name="charactername" class="form-control" placeholder="Character's name" th:field="*{character.characterName}" />
+					</div>
+					<div class="input-group mb-3 border">
+						<ul>
+							<li th:each="race : ${T(com.cadykd.kdgames.models.RyzomCharacter.CharacterRace).values()}">
+								<input type="radio" th:field="*{character.race}" th:value="${race}" />
+								<label th:for="${#ids.prev('race')}" th:text="${race}">Race</label>
+							</li>
+						</ul>
+					</div>
+					<div class="input-group mb-3 border">
+						<ul>
+							<li th:each="gender : ${T(com.cadykd.kdgames.models.RyzomCharacter.CharacterGender).values()}">
+								<input type="radio" th:field="*{character.gender}" th:value="${gender}" />
+								<label th:for="${#ids.prev('gender')}" th:text="${gender}">Gender</label>
+							</li>
+						</ul>
+					</div>
+<!--					<input type="hidden" th:field="*{character.user}" th:attr="*{#authentication.getPrincipal().getUsername()}"/>-->
+					<button class="btn btn-outline-secondary" type="submit" id="button-addon2">Submit</button>
+				
+				
+				</form>
+			
+			</div>
+		</div>
+	</div>
+</header>
+
+<!-- Footer -->
+<div th:replace="modules/footer :: footer" />
+</body>
+</html>

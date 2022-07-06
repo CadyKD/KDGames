@@ -2,6 +2,7 @@ package com.cadykd.kdgames.services;
 
 import com.cadykd.kdgames.data.RyzomCharacterRepository;
 import com.cadykd.kdgames.data.UserRepository;
+import com.cadykd.kdgames.dto.RyzomCharacterDTO;
 import com.cadykd.kdgames.dto.UserDTO;
 import com.cadykd.kdgames.models.RyzomCharacter;
 import com.cadykd.kdgames.models.User;
@@ -41,9 +42,8 @@ public class UserService {
 	}
 	
 	// Save new or make changes to a user
-	public void saveOrUpdate(User u){
-		log.info(u.toString());
-		userRepository.save(u);
+	public void saveOrUpdate(User user){
+		userRepository.save(user);
 	}
 	
 	// Remove a user from the database

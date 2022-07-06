@@ -12,6 +12,6 @@ public interface RyzomCharacterRepository extends JpaRepository<RyzomCharacter, 
 	@Query(value = "select uc.character_name from users_characters as uc where uc.userid = :userId", nativeQuery = true)
 	List<RyzomCharacter> findUserCharacters(Integer userId);
 	
-	@Query(value = "select c.character_name from characters as c where c.character_name = :characterName", nativeQuery = true)
-	RyzomCharacter findCharacterByName(String characterName);
+	@Query(nativeQuery = true)
+	RyzomCharacter findCharacterBycharacterName(String characterName);
 }
