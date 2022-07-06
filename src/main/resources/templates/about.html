@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!-- Head-->
+<div th:replace="modules/head :: head" />
+<body>
+<!-- Navbar-->
+<div th:replace="modules/navbar :: nav" />
+<!-- Header-->
+<header class="py-5">
+	<div class="container px-5">
+		<div class="row gx-5 justify-content-center">
+			<div class="text-center my-5">
+				<h1 class="display-4 fw-bolder text-white mb-2">About Me</h1>
+				<div class="m-lg-5 text-start">
+					<img src="/assets/DavidC.jpg" height="150" width="150"><br>
+					My name is David Cady. I have been building PCs since I was a kid in elementary, playing with HTML/CSS since High School, and coding since college.<br>
+					I'm also a gamer, though not the hard-core kind. I like to play casual games either alone or with friends, my favorites being Kerbal Space Program, Minecraft, and Ryzom.<br>
+					
+				</div>
+				<h1 class="display-4 fw-bolder text-white mb-2">About KDGames</h1>
+				<div class="m-lg-5 text-start">
+					<p>KDGames is a personal project that intrigued me. While there are already some tools for Ryzom out there, many are no longer supported or updated and others are not quite as good as they could be.</p>
+					This website was designed in part to complete a Full Stack Java Development course offered by PerScholas while partnered with TEKSystems and Optum.<br>
+					<a class="" href="https://perscholas.org/"><img class="m-lg-2 white-background p-lg-2" src="https://perscholas.org/wp-content/themes/per-scholas/assets/images/logo1.svg" width="351" height="46"></a><br>
+					<a class="" href="https://www.teksystems.com/en"><img class="m-lg-2 white-background p-lg-2" src="https://www.teksystems.com/-/media/teksystems/images/logos/teksystems-logo.svg" width="351" height="103"></a><br>
+					<a class="" href="https://www.optum.com/"><img class="m-lg-2 white-background p-lg-2" src="https://cdn-aem.optum.com/content/dam/optum3/optum/skin/logos/optum_2x.png" width="351" height="136"></a><br>
+				</div>
+			</div>
+		</div>
+	</div>
+</header>
+
+<!-- Footer -->
+<div th:replace="modules/footer :: footer" />
+</body>
+</html>

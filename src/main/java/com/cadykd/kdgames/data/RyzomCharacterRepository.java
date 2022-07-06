@@ -9,6 +9,9 @@ import java.util.List;
 
 @Repository
 public interface RyzomCharacterRepository extends JpaRepository<RyzomCharacter, String> {
-	@Query(value = "select uc.character_name from users_characters as uc where uc.user_name = :userName", nativeQuery = true)
-	List<RyzomCharacter> findUserCharacters(String userName);
+	@Query(value = "select uc.character_name from users_characters as uc where uc.userid = :userId", nativeQuery = true)
+	List<RyzomCharacter> findUserCharacters(Integer userId);
+	
+	@Query(nativeQuery = true)
+	RyzomCharacter findCharacterBycharacterName(String characterName);
 }

@@ -5,12 +5,15 @@ management:
       exposure:
         include: '*'
   
+server:
+  port: 8080
+  
 spring:
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
     username: root
     password: root
-    url: jdbc:mariadb://localhost:3306/CapStoneProject?createDatabaseIfNotExist=true
+    url: jdbc:mariadb://localhost:3306/KDGames?createDatabaseIfNotExist=true
   jpa:
     properties:
       hibernate:

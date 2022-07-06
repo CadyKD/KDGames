@@ -1,6 +1,8 @@
 package com.cadykd.kdgames.services;
 
+import com.cadykd.kdgames.data.RyzomCharacterRepository;
 import com.cadykd.kdgames.data.SkillRepository;
+import com.cadykd.kdgames.models.RyzomCharacter;
 import com.cadykd.kdgames.models.Skill;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
@@ -10,6 +12,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
@@ -19,11 +22,13 @@ import java.util.NoSuchElementException;
 public class SkillService {
 	// Initialize Fields
 	SkillRepository skillRepository;
+	RyzomCharacterRepository ryzomCharacterRepository;
 	
 	// Initialize Service
 	@Autowired
-	public SkillService(SkillRepository skillRepository) {
+	public SkillService(SkillRepository skillRepository, RyzomCharacterRepository ryzomCharacterRepository) {
 		this.skillRepository = skillRepository;
+		this.ryzomCharacterRepository = ryzomCharacterRepository;
 	}
 	
 	// Locate skill by name
@@ -43,5 +48,8 @@ public class SkillService {
 		skillRepository.delete(skillNode);
 	}
 	
-	
+	public List<Skill> getCharacterSkills(String characterName) {
+		RyzomCharacter character = ryzomCharacterRepository.findCharacterBycharacterName(characterName);
+		return character.getSkillTree();
+	}
 }

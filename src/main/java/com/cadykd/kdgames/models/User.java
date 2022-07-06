@@ -3,6 +3,7 @@ package com.cadykd.kdgames.models;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 // uncomment when security is added
 //import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
@@ -20,36 +21,43 @@ import java.util.Set;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Table(name = "users")
 @Entity
-// User class, for people who want to access RyzomTools and play minigames
+// User class, for people who want to access RyzomTools
 public class User {
 	// Table Fields
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	Integer id;
+	@NonNull
 	String userName;
 	@NonNull
 	String email;
 	@Setter(AccessLevel.NONE)
 	@NonNull
+	@Column(length=70)
 	String password;
 	
 	// Constructor
 	public User(String userName, String email, String password) {
 		this.userName = userName;
 		this.email = email;
-		// Delete first line under this and uncomment second line when security is added
-		this.password = password;
-		//this.password = new BCryptPasswordEncoder(4).encode(password);
+		this.password = new BCryptPasswordEncoder(4).encode(password);
+	}
+	
+	public User(Integer id, String userName, String email, String password) {
+		this.id = id;
+		this.userName = userName;
+		this.email = email;
+		this.password = new BCryptPasswordEncoder(4).encode(password);
 	}
 	
 	// One user may have many characters
 	@ToString.Exclude
-	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
 	Set<RyzomCharacter> ryzomCharacters = new LinkedHashSet<>();
 	
 	// Encryption for user passwords
 	public void setPassword(String password) {
-		// Delete first line under this and uncomment second line when security is added
-		this.password = password;
-		//this.password = new BCryptPasswordEncoder(4).encode(password);
+		this.password = new BCryptPasswordEncoder(4).encode(password);
 	}
 	
 	// Add a character to the set of characters a user has
