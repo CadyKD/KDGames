@@ -42,6 +42,12 @@ public class IndexController {
 		return "login";
 	}
 	
+	// Join Page
+	@GetMapping("/join")
+	public String signUp() {
+		return "join";
+	}
+	
 	// Website Info Page
 	@GetMapping("/about")
 	public String about() {

@@ -18,16 +18,22 @@
 					<div class="mb-3">
 						<label for="exampleInputEmail1" class="form-label">Email address</label>
 						<input type="email" class="form-control" name="email" id="exampleInputEmail1" aria-describedby="emailHelp">
-						<div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+						<div id="emailHelp" class="form-text">I promise I will never share your email with anyone else.<br>
+						No matter how much they offer to pay me.</div>
 					</div>
 					<div class="mb-3">
 						<label for="exampleInputPassword1" class="form-label">Password</label>
 						<input type="password" name="password" class="form-control" id="exampleInputPassword1">
+						<div id="passHelp" class="form-text">Passwords should be 10+ characters, but:<br>
+							I'm not your InfoSEC leader so I'll take whatever you want to use.</div>
 					</div>
 					
-					<button type="submit" class="btn btn-primary">Submit</button>
+					<button type="submit" class="btn btn-primary">Sign In</button>
 				</form>
-			
+				<div class="container mt-3 d-inline-flex flex-column align-items-center">
+					Don't have an account?<br>
+					<a class="btn btn-outline-light btn-sm px-4" th:href="@{/join}">Join Us!</a>
+				</div>
 			
 			</div>
 		</div>
