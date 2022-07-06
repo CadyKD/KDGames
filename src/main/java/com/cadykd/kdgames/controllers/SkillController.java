@@ -1,8 +1,7 @@
 package com.cadykd.kdgames.controllers;
 
-import com.cadykd.kdgames.models.RyzomCharacter;
-import com.cadykd.kdgames.models.User;
 import com.cadykd.kdgames.services.RyzomCharacterService;
+import com.cadykd.kdgames.services.SkillService;
 import com.cadykd.kdgames.services.UserService;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
@@ -13,7 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.SessionAttribute;
 
 import javax.servlet.http.HttpSession;
 import java.security.Principal;
@@ -21,21 +19,24 @@ import java.security.Principal;
 @Controller
 @Slf4j
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
-@RequestMapping(value = "characters")
-public class RyzomCharacterController {
+@RequestMapping(value = "skills")
+public class SkillController {
 	// Fields
 	UserService userService;
+	SkillService skillService;
 	RyzomCharacterService ryzomCharacterService;
 	
 	@Autowired
-	public RyzomCharacterController(UserService userService, RyzomCharacterService ryzomCharacterService) {
+	public SkillController(UserService userService, SkillService skillService, RyzomCharacterService ryzomCharacterService) {
 		this.userService = userService;
+		this.skillService = skillService;
 		this.ryzomCharacterService = ryzomCharacterService;
 	}
 	
-	@GetMapping
-	public String getUserCharacters(Model model, Principal principal, @SessionAttribute("currentUser") User user, HttpSession session) {
-		model.addAttribute("characters", ryzomCharacterService.getUserCharacters(user.getUserName()));
-		return "characters";
+	@GetMapping("/viewcharacter/{characterName}")
+	public String getCharacterSkills(@PathVariable("characterName") String characterName, Model model) {
+		model.addAttribute("character", ryzomCharacterService.findByCharacterName(characterName));
+		model.addAttribute("characterskills", skillService.getCharacterSkills(characterName));
+		return "characterskills";
 	}
 }

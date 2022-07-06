@@ -47,9 +47,16 @@ public class User {
 		this.password = new BCryptPasswordEncoder(4).encode(password);
 	}
 	
+	public User(Integer id, String userName, String email, String password) {
+		this.id = id;
+		this.userName = userName;
+		this.email = email;
+		this.password = new BCryptPasswordEncoder(4).encode(password);
+	}
+	
 	// One user may have many characters
 	@ToString.Exclude
-	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
 	Set<RyzomCharacter> ryzomCharacters = new LinkedHashSet<>();
 	
 	// Encryption for user passwords

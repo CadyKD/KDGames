@@ -3,6 +3,8 @@ package com.cadykd.kdgames.services;
 import com.cadykd.kdgames.data.RyzomCharacterRepository;
 import com.cadykd.kdgames.data.UserRepository;
 import com.cadykd.kdgames.models.RyzomCharacter;
+import com.cadykd.kdgames.models.Skill;
+import com.cadykd.kdgames.models.User;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
@@ -53,8 +55,9 @@ public class RyzomCharacterService {
 	}
 	
 	// List all characters a specific user added
-	public List<RyzomCharacter> getUserCharacters(String userName){
-		return ryzomCharacterRepository.findUserCharacters(userName);
+	public List<RyzomCharacter> getUserCharacters(String userName) {
+		User user = userRepository.findByUserName(userName);
+		Integer userId = user.getId();
+		return ryzomCharacterRepository.findUserCharacters(userId);
 	}
-	
 }

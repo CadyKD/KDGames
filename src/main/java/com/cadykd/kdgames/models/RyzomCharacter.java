@@ -22,7 +22,6 @@ import java.util.List;
 public class RyzomCharacter {
 	// Table Fields
 	@Id
-	@Column(name = "charName")
 	String characterName;
 	
 	@NotNull
@@ -49,7 +48,7 @@ public class RyzomCharacter {
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinTable(name = "users_characters",
 			joinColumns = @JoinColumn(name = "characterName"),
-			inverseJoinColumns = @JoinColumn(name = "userName"))
+			inverseJoinColumns = @JoinColumn(name = "userID"))
 	User user;
 	
 	// Each character can have only one skill tree

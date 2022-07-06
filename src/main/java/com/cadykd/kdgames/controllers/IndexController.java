@@ -47,4 +47,10 @@ public class IndexController {
 	public String about() {
 		return "about";
 	}
+	
+	// RyzomTools page
+	@GetMapping("/ryzomtools")
+	public String ryzomTools() {
+		return "ryzomtools";
+	}
 }

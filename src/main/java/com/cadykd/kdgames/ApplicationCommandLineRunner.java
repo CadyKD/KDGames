@@ -71,7 +71,7 @@ public class ApplicationCommandLineRunner implements CommandLineRunner {
 		log.info("Find All Users Sorted By Name Desc");
 		log.warn(userService.findAllSortedBy(Sort.by(Sort.Direction.DESC, "userName")).toString());
 		
-//		log.warn("Find All Characters For BaythanKD: "+ ryzomCharacterRepository.findUserCharacters("BaythanKD").toString());
+		log.warn("Find All Characters For BaythanKD: "+ ryzomCharacterService.getUserCharacters("BaythanKD").toString());
 		
 		log.warn("Find All Characters: " + ryzomCharacterRepository.findAll().toString());
 		

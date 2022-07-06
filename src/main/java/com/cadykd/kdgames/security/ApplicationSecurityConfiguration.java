@@ -64,7 +64,7 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
 				.authorizeRequests()
 				.antMatchers("/", "/index", "/about")
 				.permitAll()
-				.antMatchers("/ryzomtools").hasRole("USER")
+				.antMatchers("/ryzomtools", "/characters", "/characters/viewcharacter").hasRole("USER")
 				.antMatchers("/ryzomtools/**", "/users/**", "/characters/**").hasAuthority("ROLE_ADMIN")
 				.anyRequest().authenticated()
 				.and()

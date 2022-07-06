@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!-- Head-->
+<div th:replace="modules/head :: head" />
+<body>
+<!-- Navbar-->
+<div th:replace="modules/navbar :: nav" />
+<!-- Header-->
+<header class="py-5">
+	<div class="container px-5">
+		<div class="row gx-5 justify-content-center">
+			<div class="col-lg-8">
+				<div class="text-center my-5">
+					<h1 class="display-4 fw-bolder text-white mb-2"
+					    th:text="${characters.characterName} + ' Info Page'">Character Info Page</h1>
+				</div>
+			</div>
+		</div>
+		
+		
+		<div class="row gx-5 justify-content-center">
+			<div class="col-lg-5">
+				
+				<table class="table table-dark">
+					<thead>
+					<tr>
+						<th scope="col">Skill</th>
+						<th scope="col">Title</th>
+						<th scope="col">Level</th>
+					</tr>
+					</thead>
+					<tbody>
+					<tr th:each="characters: ${characters.characterskills}">
+						<th scope="row" th:text="${characterskills.skill_name}"></th>
+						<td th:text="${characterskills.title}"></td>
+						<td th:text="${characterskills.current_level}"></td>
+						<td></td>
+					</tr>
+					
+					</tbody>
+				</table>
+			
+			
+			</div>
+		</div>
+	
+	</div>
+
+
+</header>
+
+<!-- Footer -->
+<div th:replace="modules/footer :: footer" />
+</body>
+</html>
