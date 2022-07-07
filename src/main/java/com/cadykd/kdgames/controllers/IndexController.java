@@ -54,6 +54,17 @@ public class IndexController {
 		return "minigames";
 	}
 	
+	// Snake Games
+	@GetMapping("/snake1")
+	public String snake1() {
+		return "snake1";
+	}
+	
+	@GetMapping("/snake2")
+	public String snake2() {
+		return "snake2";
+	}
+	
 	// RyzomTools page
 	@GetMapping("/ryzomtools")
 	public String ryzomTools() {

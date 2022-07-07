@@ -13,14 +13,14 @@
 				<div class="text-center my-5">
 					<h1 class="display-4 fw-bolder text-white mb-2">Minigames</h1>
 					<div class="game-grid-container justify-content-center d-grid d-sm-flex">
-						<div class="game-list-item" onclick="location.href='snake1.html';" style="cursor: pointer;">
+						<div class="game-list-item" th:onclick="|location.href='@{/snake1}'|" style="cursor: pointer;">
 							<div class="game-container">
 								<h2 style="background-color: #606060;">Snake 1</h2>
 								<p style="background-color: #606060;">Created by following a <strong><a style="text-decoration: underline; background-color: #606060;" href="https://www.youtube.com/watch?v=QTcIXok9wNY&t=1069s" target="_blank">YouTube</a></strong> tutorial by <a style="text-decoration: underline; background-color: #606060;" href="https://www.youtube.com/c/WebDevSimplified" target="_blank">WebDevSimplified</a> with some modifications.</p>
 							</div>
 							<div class="img-container"><img src="/assets/snake1.gif"></div>
 						</div>
-						<div class="game-list-item" onclick="location.href='snake2.html';" style="cursor: pointer;">
+						<div class="game-list-item" th:onclick="|location.href='@{/snake2}'|" style="cursor: pointer;">
 							<div class="game-container">
 								<h2 style="background-color: #606060;">Snake 2</h2>
 								<p style="background-color: #606060;">This game was copied from <a style="text-decoration: underline; background-color: #606060;" href="https://coderzway.com/snake-game-in-javascript/">CoderzWay</a> and modified slightly to fit on this screen.</p>

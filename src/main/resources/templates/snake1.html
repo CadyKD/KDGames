@@ -2,20 +2,21 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <!-- Head-->
 <div th:replace="modules/head :: head" />
+<link href="/css/snake1.css" rel="stylesheet" />
 <body>
 <!-- Navbar-->
 <div th:replace="modules/navbar :: nav" />
 <!-- Header-->
-<header class="py-5">
-	<div class="container px-5">
-		<div class="row gx-5 justify-content-center">
+<header class="py-0">
+	<div class="container">
+		<div class="row justify-content-center">
 			<div class="col-lg-8">
-				<div class="text-center my-5">
+				<div class="text-center my-1">
 					<h1 class="display-4 fw-bolder text-white mb-2">Snake 1</h1>
 					
 					<div>Created by following a <strong><a style="text-decoration: underline;" href="https://www.youtube.com/watch?v=QTcIXok9wNY&t=1069s">YouTube</a></strong> tutorial by <a style="text-decoration: underline;" href="https://www.youtube.com/c/WebDevSimplified">WebDevSimplified</a> with some modifications.</div>
-					<div id="snake-board"></div>
-
+					<div id="snake-board" class="border"></div>
+					
 					</div>
 				</div>
 			</div>
@@ -25,5 +26,6 @@
 
 <!-- Footer -->
 <div th:replace="modules/footer :: footer" />
+	<script src="/js/snake/snake1.js"></script>
 </body>
 </html>
