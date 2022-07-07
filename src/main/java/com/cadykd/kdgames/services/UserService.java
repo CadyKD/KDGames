@@ -76,7 +76,7 @@ public class UserService {
 	}
 	
 	// Allows for adding of a new user account with a check to make sure we don't duplicate an account
-	public User registerNewUserAccount(UserDTO userDto) throws UserAlreadyExistException {
+	public User createNewUserAccount(UserDTO userDto) throws UserAlreadyExistException {
 		if (emailExists(userDto.getEmail())) {
 			throw new UserAlreadyExistException("There is an account with that email address: "
 					                                    + userDto.getEmail());

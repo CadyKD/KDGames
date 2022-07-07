@@ -61,7 +61,7 @@ public class UserController {
 			return "join";
 		}
 		try {
-			userService.registerNewUserAccount(userDTO);
+			userService.createNewUserAccount(userDTO);
 		} catch (UserAlreadyExistException ex) {
 			log.warn("exception in registerNewUser: "+ex);
 			rda.addFlashAttribute("fail", "A user with that name already exists.");

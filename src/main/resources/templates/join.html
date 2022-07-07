@@ -17,19 +17,19 @@
 				
 				<h2 class="my-4">Join KDGames</h2>
 				<form th:object="${user}" th:action="@{/users/registerNewUser}" autocomplete="off" method="POST" novalidate>
-					<div class="input-group mb-3">
-						<label for="exampleEmail" class="form-label">Email Address</label>
+<!--					<div class="input-group mb-3">-->
+<!--						<label for="exampleEmail" class="form-label">Email Address</label>-->
 						<input type="email" class="form-control" name="email" id="exampleEmail" placeholder="name@mail.com" th:field="*{email}" required />
-					</div>
-					<div class="input-group mb-3">
-						<label class="form-label">User name</label>
-						<input type="text" name="userName" class="form-control" placeholder="User name" th:field="*{userName}" />
-					</div>
-					<div class="input-group mb-3">
-						<label for="password" class="form-label">Password</label>
-						<input type="password" class="form-control" name="password" id="password" placeholder="password" th:field="*{password}" required />
-					</div>
-					<button type="submit" class="btn btn-primary">Sign Up</button>
+<!--					</div>-->
+<!--					<div class="input-group mb-3">-->
+<!--						<label class="form-label">User name</label>-->
+<!--						<input type="text" name="userName" class="form-control" placeholder="User name" th:field="*{userName}" />-->
+<!--					</div>-->
+<!--					<div class="input-group mb-3">-->
+<!--						<label for="password" class="form-label">Password</label>-->
+<!--						<input type="password" class="form-control" name="password" id="password" placeholder="password" th:field="*{password}" required />-->
+<!--					</div>-->
+<!--					<button type="submit" class="btn btn-primary">Sign Up</button>-->
 				</form>
 				<div class="container mt-3 d-inline-flex flex-column align-items-center">
 					Already have an account?<br>

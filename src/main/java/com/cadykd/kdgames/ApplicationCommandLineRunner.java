@@ -13,6 +13,7 @@ import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -77,11 +78,11 @@ public class ApplicationCommandLineRunner implements CommandLineRunner {
 	}
 	
 	public void checkData() {
-//		log.info("Find All Users Sorted By Name Desc");
-//		log.warn(userService.findAllSortedBy(Sort.by(Sort.Direction.DESC, "userName")).toString());
-//		log.warn("Find All Characters For BaythanKD: "+ ryzomCharacterService.getUserCharacters("BaythanKD").toString());
-//		log.warn("Find All Characters: " + ryzomCharacterRepository.findAll().toString());
-//		log.warn("Find Character named Whysper: " + ryzomCharacterService.getCharacter("Whysper").toString());
-//		log.warn("List skills for Whysper" + skillService.getCharacterSkills("Whysper").toString());
+		log.info("Find All Users Sorted By Name Desc");
+		log.warn(userService.findAllSortedBy(Sort.by(Sort.Direction.DESC, "userName")).toString());
+		log.warn("Find All Characters For BaythanKD: "+ ryzomCharacterService.getUserCharacters("BaythanKD").toString());
+		log.warn("Find All Characters: " + ryzomCharacterRepository.findAll().toString());
+		log.warn("Find Character named Whysper: " + ryzomCharacterService.getCharacter("Whysper").toString());
+		log.warn("List skills for Whysper" + skillService.getCharacterSkills("Whysper").toString());
 	}
 }
