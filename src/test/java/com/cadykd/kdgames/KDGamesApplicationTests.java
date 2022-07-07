@@ -1,21 +1,12 @@
 package com.cadykd.kdgames;
 
-import com.cadykd.kdgames.data.RyzomCharacterRepository;
-import com.cadykd.kdgames.models.User;
 import com.cadykd.kdgames.services.RyzomCharacterService;
 import com.cadykd.kdgames.services.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.domain.Sort;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
 @Slf4j
@@ -45,6 +36,13 @@ class KDGamesApplicationTests {
 		String expected = "Admin";
 		String actual = userService.findUserByName("Admin").getUserName();
 		Assertions.assertEquals(expected, actual);
+	}
+	
+	@Test
+	void passwordEncryptionTest() {
+		String expected = "adminadmin";
+		String actual = userService.findUserByName("Admin").getPassword();
+		Assertions.assertNotEquals(expected, actual);
 	}
 	
 	@Test
