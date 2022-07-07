@@ -6,6 +6,8 @@ with an MMO called Ryzom.
 Several different technologies are used:
 * Springoot
 * Spring Security
+  * User authentication and validation 
+  * BCryptPasswordEncoder
 * Thymeleaf
 * Lombok
 * SonarLint
